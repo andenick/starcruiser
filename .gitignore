@@ -1,0 +1,116 @@
+# ============ StarCruiser — code-only .gitignore (root-anchored) ============
+
+# --- Data trees (Inputs is ~156G; ship code only) ---
+/Inputs/
+/Outputs/
+/Technical/AnuData/
+/Technical/pipeline/
+/Dashboard/data/
+/Tal_Output_v1.0/Data/
+/Tal_Output_v1.0/Dashboard/data/
+**/www/data/
+_archive/
+
+# data/ is ignored, but keep the manifest that documents public sources
+/data/*
+!/data/
+!/data/MANIFEST.md
+
+# --- Internal session/process docs (never publish) ---
+**/Handoffs/
+**/HANDOFF_*.md
+**/PROGRESS_LOG.md
+**/SESSION_*.md
+**/TRACK_*.md
+**/IMPROVEMENT_PLAN*.md
+**/IMPLEMENTATION_SUMMARY.md
+.claude/
+CLAUDE.md
+.cursor/
+AGENTS.md
+_cat.txt
+_filelist.txt
+_decouple_py.py
+_scrub_text.py
+
+# --- Data / large binary file types ---
+*.parquet
+*.feather
+*.fst
+*.rdb
+*.rds
+*.RData
+*.rda
+*.sqlite
+*.sqlite3
+*.db
+*.duckdb
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.gz
+*.xlsx
+*.xls
+*.csv
+*.tsv
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.geojson
+*.shp
+*.docx
+*.doc
+*.pptx
+*.h5
+*.nc
+*.dta
+*.sav
+
+# --- Caches / build ---
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.eggs/
+.pytest_cache/
+**/.pytest_cache/
+.ipynb_checkpoints/
+*_cache/
+.Rproj.user/
+.Rhistory
+build/
+dist/
+node_modules/
+
+# --- Virtual envs ---
+.venv/
+venv/
+env/
+ENV/
+
+# --- Secrets / credentials ---
+.env
+.env.*
+!.env.example
+*.env
+api_keys*
+*.key
+*.pem
+credentials*
+secrets*
+*token*
+*.secret
+
+# --- IDE / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.backup_*
+.backup_*
+
+# logs
+*.log

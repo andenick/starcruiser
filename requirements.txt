@@ -1,0 +1,17 @@
+# StarCruiser — Python dependencies (data pipeline + Plotly Dash dashboard)
+# Install with:  pip install -r requirements.txt
+pandas
+numpy
+scipy
+scikit-learn
+requests
+matplotlib
+plotly
+dash
+fredapi
+
+# --- R dependencies (Shiny dashboard) ---
+# The R Shiny dashboard under Dashboard/ requires (install in R):
+#   install.packages(c("shiny","shinydashboard","data.table","echarts4r","DT",
+#                       "lubridate","lmtest","fst","memoise","leaflet","sf","jsonlite"))
+# or run:  Rscript Dashboard/install_packages.R
