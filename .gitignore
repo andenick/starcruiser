@@ -111,6 +111,8 @@ secrets*
 Thumbs.db
 *.backup_*
 .backup_*
+*.bak_*
+*.bak
 
 # logs
 *.log
