@@ -207,6 +207,6 @@ for series in ['CE', 'SM', 'LA', 'LN', 'OE']:
 print("\n" + "=" * 80)
 print("NEXT STEPS:")
 print("1. Run bls_series_decoder.py to parse series IDs")
-print("2. Run cross_reference_with_robin.py to detect duplicates with the source store BLS data")
+print("2. Run a cross-reference step to detect duplicates against the source-store BLS data")
 print("3. Update MASTER_CATALOG.csv with new BLS datasets")
 print("=" * 80)

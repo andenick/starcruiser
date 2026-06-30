@@ -29,7 +29,7 @@ SOURCE_ENV = SOURCE_API / ".env"
 SOURCE_ENV_EXAMPLE = SOURCE_API / ".env.example"
 PROJECT_ENV = BASE_DIR / ".env"
 
-def check_robin_census_key():
+def check_source_census_key():
     """Check if the source store has Census API key configured"""
     print("=" * 70)
     print("CENSUS API KEY SETUP - StarCruiser Geographic Analysis")
@@ -142,7 +142,7 @@ def provide_instructions():
 def main():
     """Main execution"""
     # Check for existing key in the source store
-    census_key, key_found = check_robin_census_key()
+    census_key, key_found = check_source_census_key()
     
     # Check for example template
     example_exists = check_example_template()
@@ -245,7 +245,7 @@ def main():
     else:
         # No template, no key
         print("=" * 70)
-        print("ROBIN API CONFIGURATION MISSING")
+        print("SOURCE-STORE API CONFIGURATION MISSING")
         print("=" * 70)
         print()
         print("the source store's API configuration files are not properly set up.")

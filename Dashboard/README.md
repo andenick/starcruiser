@@ -54,6 +54,10 @@ shiny::runApp("Dashboard/")
 
 The dashboard will open in your default web browser at `http://127.0.0.1:XXXX`
 
+> **Data:** the app loads prepared CSV/FST files when present, and otherwise reads
+> source data from `$DATA_ROOT/API_MODULES/...`. See `data/MANIFEST.md` and
+> `.env.example` for how to set `DATA_ROOT` and obtain the public source data.
+
 ---
 
 ## Dashboard Features
@@ -86,7 +90,7 @@ The dashboard will open in your default web browser at `http://127.0.0.1:XXXX`
 - **Interactive**: Select which sectors to display
 - **Download**: Export employment data as CSV
 
-### Tab 5: Geographic Analysis (NEW - Session 4)
+### Tab 5: Geographic Analysis
 - **Value Boxes**: Counties analyzed, cluster types, total employment, average growth
 - **County Clusters**: 8 typologies from K-means clustering (Manufacturing, Service, Tourism, etc.)
 - **Cluster Distribution**: Bar chart showing county distribution across clusters
@@ -203,7 +207,7 @@ Dashboard/
 3. **Small County Suppression**: 500-800 counties have suppressed industry detail
 4. **Informal Economy**: 10-15% US workforce not captured
 
-**Full Documentation**: `$OUTPUT_ROOT/DOCUMENTATION/DATA_GAP_REGISTRY.md`
+**Full Documentation**: a data-gap registry is maintained internally and is not distributed with this code-only release.
 
 ---
 
@@ -231,7 +235,7 @@ Dashboard/
 
 ## Phase 2 Enhancements (COMPLETED - November 29, 2025)
 
-### ✅ Features Implemented
+### Features Implemented
 
 1. **Recession Context Bands** (NBER Official Dates)
    - Gray shading on 8 time-series charts
@@ -263,8 +267,6 @@ Dashboard/
    - Professional DT table with formatting
 
 ### Code Improvements
-- `global.R`: 94 → 142 lines (+51%)
-- `app.R`: 762 → 1,020+ lines (+34%)
 - Added `add_recession_bands()` helper function
 - Pre-computed MoM changes alongside YoY
 
@@ -277,13 +279,13 @@ Dashboard/
 - [ ] ALFRED vintage tracking (revision history)
 - [ ] Employment geographic breakdown (if data available)
 
-### Phase 3: Performance Optimization (Week 2, Days 8-10)
+### Phase 3: Performance Optimization (continued)
 - [ ] Convert CSVs to FST format (10x faster loading)
 - [ ] Implement reactive caching
 - [ ] Add loading indicators
 - [ ] Profile and optimize bottlenecks
 
-### Phase 4: Data Quality & Polish (Week 2, Days 11-14)
+### Phase 4: Data Quality & Polish
 - [ ] Expand Data Quality dashboard
 - [ ] Add export functionality (CSV, PNG)
 - [ ] Custom theming
@@ -320,20 +322,19 @@ Create `Dockerfile` for reproducible deployment
 
 ## Contact & Maintenance
 
-**Project**: StarCruiser Employment Database
+**Project**: StarCruiser Economic Dashboard
 **Dashboard Location**: `Dashboard/`
-**Data Location**: `$DATA_ROOT/API_MODULES/FRED/data/`
-**Documentation**: `$OUTPUT_ROOT/DOCUMENTATION/`
+**Data Location**: `$DATA_ROOT/API_MODULES/FRED/data/` (see `data/MANIFEST.md` for the full layout)
 
 **Created**: November 28, 2025
-**Last Updated**: November 28, 2025
-**Status**: Phase 1 MVP Complete
+**Last Updated**: December 5, 2025
+**Status**: Phase 4 (Treasury & Inflation Analysis)
 
 ---
 
 ## Success Metrics
 
-### Phase 1 Targets (Achieved ✅)
+### Phase 1 Targets (Achieved)
 - [x] App runs without errors
 - [x] All 4 tabs functional
 - [x] Data updates when date range changes
@@ -349,6 +350,6 @@ Create `Dockerfile` for reproducible deployment
 
 ---
 
-**Ready to explore economic data!** 📊📈
+**Ready to explore economic data.**
 
-For questions or issues, refer to the implementation plan at `C:\Users\anden\.claude\plans\kind-shimmying-sunset.md`
+For questions or issues, see the project `README.md` and `data/MANIFEST.md`.

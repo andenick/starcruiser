@@ -31,7 +31,7 @@ LOCAL_BEA = (PROJECT_ROOT / "Inputs/source/BEA")
 LOCAL_BEA.mkdir(parents=True, exist_ok=True)
 
 print("=" * 80)
-print("BEA DATA IMPORT FROM ROBIN")
+print("BEA DATA IMPORT FROM SOURCE STORE")
 print("=" * 80)
 print(f"Source: {SOURCE_BEA}")
 print(f"Target: {LOCAL_BEA}")

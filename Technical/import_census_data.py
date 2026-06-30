@@ -32,7 +32,7 @@ LOCAL_CENSUS = (PROJECT_ROOT / "Inputs/source/CENSUS")
 LOCAL_CENSUS.mkdir(parents=True, exist_ok=True)
 
 print("=" * 80)
-print("CENSUS DATA IMPORT FROM ROBIN")
+print("CENSUS DATA IMPORT FROM SOURCE STORE")
 print("=" * 80)
 print(f"Source: {SOURCE_CENSUS}")
 print(f"Target: {LOCAL_CENSUS}")

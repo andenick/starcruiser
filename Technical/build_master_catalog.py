@@ -49,7 +49,7 @@ print()
 master_catalog = []
 cross_reference = []
 series_index = []
-robin_checkout = []
+source_checkout = []
 
 def compute_file_hash(file_path):
     """Compute MD5 hash for file integrity"""
@@ -109,11 +109,11 @@ def analyze_csv(file_path, source_name, source_type):
         }
 
 # ============================================================================
-# ROBIN IMPORTS - Track what came from the source store repository
+# SOURCE-STORE IMPORTS - Track what came from the source store repository
 # ============================================================================
 print("Step 1: Cataloging the source store imports...")
 
-robin_imports = {
+source_imports = {
     'WORLD_BANK': {
         'source_type': 'International Organization',
         'source_path': SOURCE_DATA / 'WORLD_BANK',
@@ -161,8 +161,8 @@ robin_imports = {
     }
 }
 
-robin_import_count = 0
-for source_name, paths in robin_imports.items():
+source_import_count = 0
+for source_name, paths in source_imports.items():
     if paths['starcruiser_path'].exists():
         print(f"\n  Cataloging {source_name}...")
         csv_files = list(paths['starcruiser_path'].glob("*.csv"))
@@ -172,7 +172,7 @@ for source_name, paths in robin_imports.items():
             master_catalog.append(metadata)
 
             # Track the source store checkout
-            robin_checkout.append({
+            source_checkout.append({
                 'source_name': source_name,
                 'file_name': csv_file.name,
                 'source_path': str(paths['source_path']),
@@ -182,10 +182,10 @@ for source_name, paths in robin_imports.items():
                 'purpose': 'Employment database integration'
             })
 
-            robin_import_count += 1
+            source_import_count += 1
             print(f"    - {csv_file.name}: {metadata.get('records', 'N/A'):,} records")
 
-print(f"\n  Total the source store imports cataloged: {robin_import_count} files")
+print(f"\n  Total the source store imports cataloged: {source_import_count} files")
 
 # ============================================================================
 # EXTERNAL DOWNLOADS - Indeed, ADP, NBER
@@ -227,21 +227,21 @@ print(f"  Total records: {master_df['records'].sum():,.0f}")
 print(f"  Total size: {master_df['file_size_mb'].sum():.1f} MB")
 
 # ============================================================================
-# SAVE ROBIN CHECKOUT LEDGER
+# SAVE SOURCE CHECKOUT LEDGER
 # ============================================================================
 print("\nStep 4: Saving source checkout ledger...")
 
-checkout_df = pd.DataFrame(robin_checkout)
+checkout_df = pd.DataFrame(source_checkout)
 checkout_file = LOCAL_CATALOGS / "SOURCE_CHECKOUT_LEDGER.csv"
 checkout_df.to_csv(checkout_file, index=False, encoding='utf-8')
 
 # Also save to the source store directory for bidirectional tracking
-robin_checkout_file = SOURCE_DATA / "LOCAL_CHECKOUT_LEDGER.csv"
-robin_checkout_file.parent.mkdir(parents=True, exist_ok=True)
-checkout_df.to_csv(robin_checkout_file, index=False, encoding='utf-8')
+source_ledger_file = SOURCE_DATA / "LOCAL_CHECKOUT_LEDGER.csv"
+source_ledger_file.parent.mkdir(parents=True, exist_ok=True)
+checkout_df.to_csv(source_ledger_file, index=False, encoding='utf-8')
 
 print(f"  Saved to StarCruiser: {checkout_file.name}")
-print(f"  Saved to the source store: {robin_checkout_file}")
+print(f"  Saved to the source store: {source_ledger_file}")
 print(f"  Files checked out from the source store: {len(checkout_df)}")
 
 # ============================================================================
@@ -300,7 +300,7 @@ summary_stats = {
     'total_records': int(master_df['records'].sum()),
     'total_size_mb': float(master_df['file_size_mb'].sum()),
     'sources': {
-        'robin_imports': robin_import_count,
+        'source_imports': source_import_count,
         'external_downloads': external_count,
         'pending_bulk_downloads': 6  # BLS_FTP, QCEW, ILO, OECD, IMF, NBER
     },
@@ -309,9 +309,9 @@ summary_stats = {
         'earliest': master_df['date_min'].dropna().min() if not master_df['date_min'].dropna().empty else 'N/A',
         'latest': master_df['date_max'].dropna().max() if not master_df['date_max'].dropna().empty else 'N/A'
     },
-    'robin_integration': {
-        'files_from_robin': len(checkout_df),
-        'checkout_ledger_location': str(robin_checkout_file)
+    'source_integration': {
+        'files_from_source': len(checkout_df),
+        'checkout_ledger_location': str(source_ledger_file)
     }
 }
 
@@ -350,9 +350,9 @@ print(f"  3. {cross_ref_file.name} - Cross-reference template (to populate)")
 print(f"  4. {series_file.name} - Series index template (to populate)")
 print(f"  5. {summary_file.name} - Summary statistics")
 
-print(f"\nRobin Integration:")
+print(f"\nSource Store Integration:")
 print(f"  Files checked out from the source store: {len(checkout_df)}")
-print(f"  Ledger saved to: {robin_checkout_file}")
+print(f"  Ledger saved to: {source_ledger_file}")
 
 print("\n" + "=" * 80)
 print("NEXT STEPS")
